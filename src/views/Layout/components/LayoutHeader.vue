@@ -1,15 +1,7 @@
 <script setup>
-  import { getCategoryAPI } from '@/apis/layout'
-  import { onMounted, ref } from 'vue'
+  import { useCategoryStore } from '@/stores/category';
+  const categoryStore = useCategoryStore()
 
-  // const categoryList = ref([])
-  const getCategory = async () => {
-    const res = await getCategoryAPI()
-    // categoryList.value = res.result
-    console.log(res)
-  }
-
-  onMounted(() => getCategory())
 </script>
 
 <template>
@@ -18,20 +10,18 @@
       <h1 class="logo">
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
+      <!-- 头部导航列表 -->
       <ul class="app-header-nav">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
+          <!-- 路由链接：暂时都指向根路径（实际应根据item动态生成路径） -->
+          <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
-        <li> <RouterLink to="/">居家</RouterLink> </li>
-        <li> <RouterLink to="/">美食</RouterLink> </li>
-        <li> <RouterLink to="/">服饰</RouterLink> </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜">
-      </div>
+        </div>
       <!-- 头部购物车 -->
-
     </div>
   </header>
 </template>
