@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 
 import App from './App.vue'
 import router from './router'
@@ -16,7 +18,18 @@ getCategoryAPI().then(res => {
 
 const app = createApp(App)
 
-app.use(createPinia())
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 app.use(router)
+
+// 全局指令注册
+import { lazyPlugin } from '@/directives'
+app.use(lazyPlugin)
+
+// 引入全局组件插件
+import { componentPlugin } from '@/components'
+
+app.use(componentPlugin)
 
 app.mount('#app')

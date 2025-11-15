@@ -25,7 +25,7 @@
         </li>
         <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
           <!-- 路由链接：暂时都指向根路径（实际应根据item动态生成路径） -->
-          <RouterLink to="/">{{ item.name }}</RouterLink>
+          <RouterLink active-class="active" :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         </li>
       </ul>
 

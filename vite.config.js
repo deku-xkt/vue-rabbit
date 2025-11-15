@@ -12,6 +12,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/', // 本地运行时用绝对根路径，部署到子目录才需要改
   plugins: [
     vue(),
     vueDevTools(),
